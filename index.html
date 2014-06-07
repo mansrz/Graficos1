@@ -40,14 +40,14 @@
         renderer.shadowMapEnabled = true;
 
         // create the ground plane
-        var planeGeometry = new THREE.PlaneGeometry(60,40,1,1);
+        var planeGeometry = new THREE.PlaneGeometry(95,45,1,1);
         var planeMaterial =    new THREE.MeshLambertMaterial({color: 0xffffff});
         var plane = new THREE.Mesh(planeGeometry,planeMaterial);
         plane.receiveShadow  = true;
 
         // rotate and position the plane
         plane.rotation.x=-0.5*Math.PI;
-        plane.position.x=10;
+        plane.position.x=20;
         plane.position.y=0;
         plane.position.z=-5;
 
@@ -67,6 +67,14 @@
 
         // add the cube to the scene
         scene.add(cube);
+        var geometry = new THREE.TorusGeometry(5,2,26,20,6.3 );
+        var material = new THREE.MeshLambertMaterial( { color: 0xffff00 } );
+        var torus = new THREE.Mesh( geometry, material );
+        scene.add( torus );
+        torus.position.x=26;
+        torus.position.y=10;
+        torus.position.z=-5;
+        torus.castShadow= true;
         //Se insstancia la geometria de la piramide, utilizando la función 'CylinderGeometry'.
         //En esta función se especifica el tamano de la base, altura, lados.
         //Fuentes: https://github.com/mrdoob/three.js/issues/1421
@@ -77,8 +85,9 @@
         var piramide=new THREE.Mesh(piramidegeometria,piramideMaterial)
         //Se agrega la posición en pantalla.
         piramide.position.x=46;
-        piramide.position.y=5;
+        piramide.position.y=10;
         piramide.position.z=15;
+        piramide.castShadow= true;
         //Se Agrega a la escena
         scene.add(piramide);
 
@@ -120,6 +129,7 @@
         var controls = new function() {
             this.rotationSpeed = 0.02;
             this.bouncingSpeed = 0.03;
+
         }
 
         var gui = new dat.GUI();
@@ -140,9 +150,14 @@
             sphere.position.x = 5+( 10*(Math.cos(step)));
             sphere.position.y = 2 +( 10*Math.abs(Math.sin(step)));
 
-            piramide.rotation.x += controls.rotationSpeed;
+
+           // piramide.rotation.x += controls.rotationSpeed;
             piramide.rotation.y += controls.rotationSpeed;
-            piramide.rotation.z += controls.rotationSpeed;
+            //piramide.rotation.z += controls.rotationSpeed;
+
+            torus.rotation.x += controls.rotationSpeed;
+            //torus.rotation.y += controls.rotationSpeed;
+           // torus.rotation.z += controls.rotationSpeed;
 
 
             // render using requestAnimationFrame
