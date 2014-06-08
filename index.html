@@ -91,7 +91,7 @@
         //Se Agrega a la escena
         scene.add(piramide);
 
-        var sphereGeometry = new THREE.SphereGeometry(4,20,20);
+        var sphereGeometry = new THREE.SphereGeometry(controls.rd_esfera,20,20);
         var sphereMaterial = new THREE.MeshLambertMaterial({color: 0x7777ff});
         var sphere = new THREE.Mesh(sphereGeometry,sphereMaterial);
 
@@ -129,12 +129,18 @@
         var controls = new function() {
             this.rotationSpeed = 0.02;
             this.bouncingSpeed = 0.03;
-
+			this.rd_esfera=1;
+			this.Toroide_X=true;
+			this.Toroide_Y=false;
         }
+		
 
         var gui = new dat.GUI();
         gui.add(controls, 'rotationSpeed',0,0.5);
         gui.add(controls, 'bouncingSpeed',0,0.5);
+		gui.add(controls, 'rd_esfera',1,50).name('Radio de La Esfera');
+		gui.add(controls,'Toroide_X').name('Toroide Gira en X');
+		gui.add(controls,'Toroide_Y').name('Toroide Gira en Y');
 
         render();
 
@@ -144,18 +150,24 @@
             cube.rotation.x += controls.rotationSpeed;
             cube.rotation.y += controls.rotationSpeed;
             cube.rotation.z += controls.rotationSpeed;
-
+			
             // bounce the sphere up and down
             step+=controls.bouncingSpeed;
+			sphere.
             sphere.position.x = 5+( 10*(Math.cos(step)));
             sphere.position.y = 2 +( 10*Math.abs(Math.sin(step)));
 
 
            // piramide.rotation.x += controls.rotationSpeed;
+		   
             piramide.rotation.y += controls.rotationSpeed;
-            //piramide.rotation.z += controls.rotationSpeed;
-
+			//piramide.rotation.z += controls.rotationSpeed;
+			if(controls.Toroide_X==true){
             torus.rotation.x += controls.rotationSpeed;
+			}else if(controls.Toroide_Y==true){
+			torus.rotation.y += controls.rotationSpeed;
+			}
+            
             //torus.rotation.y += controls.rotationSpeed;
            // torus.rotation.z += controls.rotationSpeed;
 
