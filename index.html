@@ -68,10 +68,16 @@
 
         // add the cube to the scene
         scene.add(cube);
+        //se crea el toroide
+        //Fuente:https://github.com/josdirksen/learning-threejs/blob/33f5a8243423901c85ef7c9341efcf0b010d93bf/chapter-05/08-basic-3d-geometries-torus-knot.html
         var torusgeometry = new THREE.TorusGeometry(5,2,26,20,6.3 );
+        //seleccionamos material del toroide y su color(amarillo)
         var torusmaterial = new THREE.MeshLambertMaterial( { color: 0xffff00 } );
         var torus = new THREE.Mesh(torusgeometry, torusmaterial );
+        //se añade el toroide a la escena
         scene.add( torus );
+        
+        //se indica posición del toroide
         torus.position.x=26;
         torus.position.y=10;
         torus.position.z=-5;
